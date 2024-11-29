@@ -1,18 +1,23 @@
-import { Card } from "@/components/atoms/Card";
-import { GridLayout } from "@/components/layouts/GridLayout";
-import { FaCircleInfo } from "react-icons/fa6";
+import { FaGithub } from "react-icons/fa6"
+import { motion } from "framer-motion"
 
-export const Credits = () => (
-    <Card>
-        <GridLayout>
-            <div className="flex flex-col gap-4">
-                <p className="flex gap-4">
-                    <FaCircleInfo size={24} />
-                    Информация об авторе
-                </p>
-
-                <p>Работу выполнил студент группы ДБИ-481рсоб <span className="p-2 bg-blue-400 text-white rounded-xl">Гармаш Данила Иванович</span></p>
-            </div>
-        </GridLayout>
-    </Card>
-)
+export function Credits() {
+    return (
+        <motion.div 
+            className="fixed bottom-4 right-4 flex items-center gap-2 text-white/60 hover:text-white/80 transition-colors duration-200"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+        >
+            <a 
+                href="https://github.com/yourusername/todo-app" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm"
+            >
+                <FaGithub className="w-4 h-4" />
+                View on GitHub
+            </a>
+        </motion.div>
+    )
+}

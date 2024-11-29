@@ -1,12 +1,15 @@
-import { AnimatePresence } from "framer-motion";
-import { PropsWithChildren } from "react";
+import { ReactNode } from 'react';
 
-export const AppWrapper = (props: PropsWithChildren) => (
-    <div className="font-sans text-slate-900">
-        <div className="min-h-screen min-w-screen grid justify-stretch items-start pt-72 pb-36 bg-blue-500/70">
-            <AnimatePresence mode="sync">
-                {props.children}
-            </AnimatePresence>
+interface Props {
+    children: ReactNode
+}
+
+export function AppWrapper({ children }: Props) {
+    return (
+        <div className="min-h-screen w-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white">
+            <div className="min-h-screen w-full backdrop-blur-sm bg-black/10 py-8 px-4">
+                {children}
+            </div>
         </div>
-    </div>
-)
+    )
+}

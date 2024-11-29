@@ -1,8 +1,15 @@
-import { FaCircleCheck } from "react-icons/fa6";
+import { FaTasks } from 'react-icons/fa';
 
-export const Logo = () => (
-    <h1 className="text-4xl flex gap-4 items-center text-white drop-shadow-md border-b-2 pb-4">
-        <FaCircleCheck size={36} />
-        TODO APP
-    </h1>
-)
+export function Logo() {
+    return (
+        <div className="flex items-center gap-3 mb-8">
+            <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
+                <FaTasks className="w-6 h-6 text-white" />
+            </div>
+            <div>
+                <h1 className="text-2xl font-bold text-white">TaskFlow</h1>
+                <p className="text-sm text-white/60">Stay organized, get more done</p>
+            </div>
+        </div>
+    )
+}

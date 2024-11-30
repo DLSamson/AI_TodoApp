@@ -8,6 +8,8 @@ export type TodoItem = {
     created_at: number,
     updated_at: number,
     subTodos: subTodoItem[],
+    dueDate: number | null,
+    priority: 'low' | 'medium' | 'high',
 }
 
 export type subTodoItem = {
@@ -19,7 +21,9 @@ export type subTodoItem = {
 };
 
 export type TodoItemForm = {
-    text: string
+    text: string,
+    dueDate?: number | null,
+    priority?: 'low' | 'medium' | 'high',
 }
 
 export class TodoStore {
@@ -34,7 +38,7 @@ export class TodoStore {
     }
 
     // Todo Actions
-    addTodo({ text }: TodoItemForm) {
+    addTodo({ text, dueDate, priority }: TodoItemForm) {
         this.items.push({
             id: Date.now(),
             text,
@@ -43,6 +47,8 @@ export class TodoStore {
             subTodos: [],
             created_at: Date.now(),
             updated_at: Date.now(),
+            dueDate: dueDate ?? null,
+            priority: priority ?? 'low',
         });
         this.sortTodos();
         this.storeTodos();

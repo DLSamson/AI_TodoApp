@@ -9,7 +9,7 @@ import { FaPlus, FaCalendarAlt, FaFlag } from "react-icons/fa"
 
 export function TodoForm() {
     const [title, setTitle] = useState('')
-    const [dueDate, setDueDate] = useState('')
+    const [dueDate, setDueDate] = useState<string>('')
     const [priority, setPriority] = useState<'low' | 'medium' | 'high'>('medium')
     const [isLoading, setIsLoading] = useState(false)
     const { todoStore } = useStore()

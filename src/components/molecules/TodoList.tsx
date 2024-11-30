@@ -5,7 +5,7 @@ import { Spinner } from "@/components/atoms/Spinner"
 import { useStore } from "@/hooks/useStore"
 import { observer } from "mobx-react-lite"
 import { motion, AnimatePresence } from "framer-motion"
-import { FaCalendarAlt, FaFlag, FaChevronRight, FaPlus } from "react-icons/fa"
+import { FaCalendarAlt, FaChevronRight, FaPlus } from "react-icons/fa"
 import { FaCheck, FaTrash, FaPencilAlt } from "react-icons/fa"
 import { useState, useMemo } from "react"
 
@@ -36,8 +36,8 @@ export const TodoList = observer(() => {
             
             // For uncompleted todos, sort by priority
             if (!a.isCompleted && !b.isCompleted) {
-                const aPriority = a.priority || 'medium'
-                const bPriority = b.priority || 'medium'
+                const aPriority = a.priority ?? 'medium'
+                const bPriority = b.priority ?? 'medium'
                 return priorityOrder[aPriority] - priorityOrder[bPriority]
             }
             
@@ -347,7 +347,7 @@ export const TodoList = observer(() => {
                                                         </span>
                                                         <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                                             <button
-                                                                onClick={() => todoStore.selectTodo(todo, subtodo.id)}
+                                                                onClick={() => todoStore.selectTodo(todo)}
                                                                 disabled={loadingId === `${todo.id}-${subtodo.id}`}
                                                                 className="p-1 rounded hover:bg-white/10 text-white/60 hover:text-white/80 transition-colors"
                                                             >

@@ -7,16 +7,17 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "tsc -b && vite build && gh-pages -d dist"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@types/react-datepicker": "^7.0.0",
-    "autoprefix": "^1.0.1",
     "autoprefixer": "^10.4.20",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "framer-motion": "^11.11.11",
+    "gh-pages": "^6.2.0",
     "mobx": "^6.13.5",
     "mobx-react-lite": "^4.0.7",
     "postcss": "^8.4.49",

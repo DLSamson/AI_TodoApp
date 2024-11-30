@@ -18,19 +18,26 @@ export const TodoEditPanel = observer(() => {
     const { todoStore } = useStore()
     const [isLoading, setIsLoading] = useState(false)
     const [text, setText] = useState(todoStore.selectedTodo?.text || '')
-    const [dueDate, setDueDate] = useState(todoStore.selectedTodo?.dueDate ? new Date(todoStore.selectedTodo.dueDate).toISOString().split('T')[0] : '')
-    const [priority, setPriority] = useState<'low' | 'medium' | 'high'>(todoStore.selectedTodo?.priority || 'medium')
+    const [dueDate, setDueDate] = useState<string>(
+        todoStore.selectedTodo?.dueDate 
+            ? new Date(todoStore.selectedTodo.dueDate).toISOString().split('T')[0] 
+            : ''
+    )
+    const [priority, setPriority] = useState<'low' | 'medium' | 'high'>(
+        todoStore.selectedTodo?.priority ?? 'medium'
+    )
     const [newSubTodo, setNewSubTodo] = useState('')
 
     if (!todoStore.selectedTodo) return null
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
-        if (!text.trim() || isLoading) return
+        if (!text.trim() || isLoading || !todoStore.selectedTodo) return
 
+        const todo = todoStore.selectedTodo
         setIsLoading(true)
         try {
-            await todoStore.updateTodo(todoStore.selectedTodo.id, {
+            await todoStore.updateTodo(todo.id, {
                 text,
                 dueDate: dueDate ? new Date(dueDate).getTime() : null,
                 priority
@@ -42,11 +49,11 @@ export const TodoEditPanel = observer(() => {
     }
 
     const handleAddSubTodo = async () => {
-        if (!newSubTodo.trim() || isLoading) return
+        if (!newSubTodo.trim() || isLoading || !todoStore.selectedTodo) return
 
         setIsLoading(true)
         try {
-            await todoStore.addSubTodo(todoStore.selectedTodo.id, newSubTodo)
+            await todoStore.addSubTodo(todoStore.selectedTodo.id, { text: newSubTodo })
             setNewSubTodo('')
         } finally {
             setIsLoading(false)
@@ -54,7 +61,7 @@ export const TodoEditPanel = observer(() => {
     }
 
     const handleToggleSubTodo = async (subTodoId: number) => {
-        if (isLoading) return
+        if (isLoading || !todoStore.selectedTodo) return
 
         setIsLoading(true)
         try {
